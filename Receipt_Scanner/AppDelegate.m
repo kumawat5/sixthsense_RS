@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Login.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,22 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    sleep(5);
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    if([[NSUserDefaults standardUserDefaults] valueForKey:@"AlreadyLogi"])
+    {
+        NSLog(@"already login");
+        UINavigationController*nav = [storyBoard instantiateViewControllerWithIdentifier:@"log"];
+        self.window.rootViewController = nav;
+    }
+    else
+    {
+        NSLog(@"not login");
+        
+        Login  *loginViewController= [storyBoard instantiateViewControllerWithIdentifier:@"Login"];
+        self.window.rootViewController = loginViewController;
+        
+    }
     return YES;
 }
 
